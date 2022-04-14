@@ -3,52 +3,46 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.stream.Collectors;
 
-/*
-https://programmers.co.kr/learn/courses/30/lessons/77484?language=java
-로또의 최고 순위와 최저 순위
-*/
-
 class Solution {
     public int[] solution(int[] lottos, int[] win_nums) {
         
-      int min = 0;
-      int max = 0;
-        int count = 0;
+      int min = 0; // 로또 최저 등수를 받을 int 
+      int max = 0; // 로또 최고 등수를 받을 int 
+      int count = 0; // 맞는 로또 번호의 개수를 셀 int 
       
       ArrayList<Integer> win = (ArrayList<Integer>) Arrays.stream(win_nums).boxed().collect(Collectors.toList());
+      // 로또 당첨자의 번호를 받아 순서대로 sort 
       ArrayList<Integer> lotto = (ArrayList<Integer>) Arrays.stream(lottos).boxed().collect(Collectors.toList());
-      
-        int zero = Collections.frequency(lotto, 0);
-        // 0 의 갯수를 셈 
+      // 내가 쓴 로또 번호의 번호를 받아 순서대로 sort 
+      int zero = Collections.frequency(lotto, 0);
+      // 내가 쓴 로또 번호에서 0 의 개수를 셈 
 
       for (int i = 0; i < lotto.size(); i++) {
-         if (lotto.contains(win.get(i))){
-            count++; // 몇개 맞췄는지 알 수 있음 
-         }
+         if (lotto.contains(win.get(i))){count++;}
       }
+    
       switch (count) {
       case 6:
          max = 1;
-            break;
+         break;
       case 5:
-        max = 2;
-              break;
+         max = 2;
+         break;
       case 4:
          max = 3;
-              break;
+         break;
       case 3:
          max = 4;
-              break;
+         break;
       case 2:
          max = 5;
-              break;
+         break;
       default: 
          max = 6;
-              break;
+         break;
    }
-
     min = max - zero;
-        if (min == 0){min = 1;}
+        if (min == 0){min = 1;} 
         int[] arr = new int[] {min, max};
         return arr;
     }
