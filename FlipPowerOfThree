@@ -1,0 +1,23 @@
+class Solution {
+    public int solution(int n) {
+        int answer = 0; 
+        String str = "";
+        int len = 0;
+       
+        // 3진법
+        while (n > 0) {
+        	str = (n % 3) + str;
+        	n = n / 3;
+        }
+        // 앞뒤 반전
+        StringBuffer sb = new StringBuffer(str);
+        String reversedStr = sb.reverse().toString();
+        // 10진법
+        len = reversedStr.length();
+        answer = Character.getNumericValue(reversedStr.charAt(reversedStr.length() - 1));  
+        for (int i = 0; i < reversedStr.length() - 1 ; i++) {
+        	answer = (int) (answer + (Math.round(Math.pow(3, len-i-1)) * Character.getNumericValue(reversedStr.charAt(i))));
+        }      
+        return answer;
+    }
+}
