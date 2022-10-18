@@ -1,0 +1,16 @@
+import java.util.TreeSet;
+
+class PickTwoAndSum {
+    public int[] solution(int[] numbers) {
+         int[] answer = {};
+	       TreeSet<Integer> num = new TreeSet<Integer>();
+	        
+	        for (int i = 0 ; i < numbers.length; i++) {
+	        	for (int j = i+1; j < numbers.length; j++) {
+	        		num.add(numbers[i] + numbers[j]);
+	        	}
+	        }
+	        answer = num.stream().mapToInt(i -> i).toArray();
+	        return answer;
+    }
+}
