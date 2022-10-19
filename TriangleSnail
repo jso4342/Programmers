@@ -1,0 +1,61 @@
+import java.util.Arrays;
+class Solution {
+    public int[] solution(int n) {
+          int[][] triangle = new int[n][n];
+	        
+	        int x = 0; // x 좌표
+	        int y = 0; // y 좌표 
+	        int num = 1; // 셀 안에 들어갈 수 
+            
+            int k = 0; // answer 의 인덱스를 저장할 수 
+	        int count = n - 1; // 방향이 바뀔 때 마다 달팽이가 움직여야하는 칸 수 
+	        int sellNum = 0; // 전체 셀의 개수
+	        
+            // 전체 셀의 개수 계산 
+	        for (int i = 1; i < n + 1; i++) {sellNum += i;}
+	        
+	        int[] answer = new int[sellNum];
+	        
+	       while(true) {
+	    	   if (count == 0) {count = 1;} // n = 4 의 10 처럼, count가 0이 되는 상황에도 한 번은 달팽이가 움직여야하기 때문에 1로 선언해준다. 
+	    	   for (int i = 0; i < count; i++) {
+	    		   if(sellNum == 0) { break; }
+	    		   triangle[x][y] = num; 
+	    		   x++;
+	    		   num++;
+	    		   sellNum--;
+	    	   }
+	    	   for (int i = 0; i < count; i++) {
+	    		   if(sellNum == 0) { break; }
+	    		   triangle[x][y] = num;
+	    		   y++;
+	    		   num++;
+	    		   sellNum--;
+	    	   }
+	    	   for (int i = 0; i < count; i++) {
+	    		   if(sellNum == 0) { break; }
+	    		   triangle[x][y] = num;
+	    		   x--;
+	    		   y--;
+	    		   num++;
+	    		   sellNum--;
+	    	   }
+	    	  x = x + 2;
+	    	  y = y + 1;
+
+	    	  count -= 3; // 한 바퀴 돌 때 마다, 채우는 칸의 개수가 3개씩 줄음  
+
+	       }
+
+	       // triangle 2차원 배열을 1차원 배열인 answer 로 옮기기
+	       while (k < answer.length) {
+	    	   for (int i = 0; i < n; i++) {
+	    		   for (int j = 0; j < i + 1; j++) {
+	    			   answer[k] = triangle[i][j];
+	    			   k++;
+	    		   }
+	    	   }
+	       }
+	       return answer;
+    }
+}
