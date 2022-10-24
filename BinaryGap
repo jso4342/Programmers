@@ -1,0 +1,17 @@
+import java.util.*;
+
+class Solution {
+    public int solution(int N) {
+	        String binary = Integer.toBinaryString(N);
+	        int last = 0;
+	        HashSet<Integer> set = new HashSet<Integer>();
+            
+	        String[] zeros = binary.split("1"); 
+             	int finish = zeros.length;
+	        if (binary.charAt(binary.length() - 1) != '1'){finish = finish - 1;} // 마지막이 0일 때 
+	        
+	        for (int i = 1; i < finish; i++) {set.add(zeros[i].length());}
+	        if (set.size() == 0) {return 0;}
+	        return Collections.max(set);
+    }
+}
