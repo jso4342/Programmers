@@ -1,0 +1,10 @@
+function solution(s) {
+    s = s.toLowerCase();
+    const boxes = s.split(" ");
+
+    for (var i = 0; i < boxes.length; i++){
+        boxes[i] = boxes[i].charAt(0).toUpperCase() + boxes[i].slice(1);
+    }
+    var answer = boxes.join(" ");
+    return answer;
+}
